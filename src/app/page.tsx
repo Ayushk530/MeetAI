@@ -6,8 +6,7 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 
 export default function Home() {
-   const { 
-        data: session} = authClient.useSession() 
+   const { data: session} = authClient.useSession() 
  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
