@@ -19,10 +19,10 @@ import{
     FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import path from "path";
-
+import { useRouter } from "next/navigation";
+import {FaGithub,FaGoogle} from "react-icons/fa";
 const formSchema = z.object({
     name: z.string().min(1,{message:"Enter your name"}),
     email : z.string().email(),
@@ -34,7 +34,7 @@ const formSchema = z.object({
     path : ["confirmpassword"],
 });
 export const SignUpView = () =>{
-    const router = useRouter();
+    const router = useRouter(); 
     const [error,setError] = useState<string|null>(null);
     const [pending,setPending] =useState(false);
     const form = useForm<z.infer<typeof formSchema>>({resolver:zodResolver(formSchema),
@@ -46,13 +46,14 @@ export const SignUpView = () =>{
     },
     });
 
-    const onSubmit= (data:z.infer<typeof formSchema>)=>{
+const onSubmit= (data:z.infer<typeof formSchema>)=>{
         setError(null);
         setPending(true);
         authClient.signUp.email({
             name : data.name,
             email:data.email,
-            password : data.password
+            password : data.password,
+            callbackURL : "/",
         },
         {
             onSuccess : ()=>{
@@ -65,9 +66,26 @@ export const SignUpView = () =>{
             },
         }
     );
-
   };
 
+  const onSocial= (provider:"github"|"google")=>{
+        setError(null);
+        setPending(true);
+        authClient.signIn.social({
+            provider:provider,
+            callbackURL:"/",
+        },
+        {
+            onSuccess : ()=>{
+                setPending(false);
+            },
+            onError:({error})=>{
+                setPending(false);
+                setError(error.message)
+            },
+        }
+    );
+  };
     return(
         <div className="flex flex-col gap-6">
             <Card className="overflow-hidden p-0">
@@ -175,20 +193,22 @@ export const SignUpView = () =>{
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <Button
-                                        disabled={pending} 
+                                        disabled={pending}
+                                        onClick={()=>onSocial("google")}
                                         variant="outline"
                                         type="button"
                                         className="w-full"
                                     >
-                                        Google
+                                        <FaGoogle/>
                                     </Button>
                                     <Button
                                         disabled={pending} 
+                                        onClick={()=>{onSocial("github")}}
                                         variant="outline"
                                         type="button"
                                         className="w-full"
                                     >
-                                        Github
+                                        <FaGithub/>
                                     </Button>
                                 </div>
                                 <div className="text-center text-sm">
