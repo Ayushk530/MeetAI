@@ -5,20 +5,18 @@ import { useSidebar } from "@/components/ui/sidebar";
 import { PanelLeftCloseIcon, PanelLeftIcon, SearchIcon } from "lucide-react";
 import { DashboardCommand } from "./dashboard-command";
 import { useEffect, useState } from "react";
+import Mousetrap from "mousetrap";
 
 export const DashboardNavbar = ()=>{
     const {state,toggleSidebar,isMobile} = useSidebar();
     const [commandOpen,setCommandOpen] = useState(false);
-    useEffect(()=>{
-        const down = (e:KeyboardEvent)=>{
-            if(e.key==="k" && (e.metaKey||e.ctrlKey)){
-                e.preventDefault();
-                setCommandOpen((open)=>!open);
-            }
-        };
-        document.addEventListener("keydown",down);
-        return()=>document.removeEventListener("keydown",down);
-    });
+      useEffect(() => {
+   Mousetrap.bind(['command+k', 'ctrl+k'], (e: KeyboardEvent) => {
+        e.preventDefault();
+        setCommandOpen(open => !open);
+        return false;
+  });
+}, []);
     return(
         <>
         <DashboardCommand open={commandOpen} setOpen={setCommandOpen}/>
