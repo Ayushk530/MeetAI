@@ -6,6 +6,7 @@ import { GeneratedAvatar } from "@/components/generated-avatar"
 import { CornerDownRightIcon, VideoIcon} from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
+
 export const columns: ColumnDef<AgentGetOne>[] = [
   {
     accessorKey: "name",
@@ -37,7 +38,7 @@ export const columns: ColumnDef<AgentGetOne>[] = [
             variant="outline"
             className="flex items-center gap-x-2 [&>svg]:size-4">
             <VideoIcon className="text-black-700"/>
-             5 Meetings
+             {row.original.meetingCount} {row.original.meetingCount===1 ? "Meeting" : "Meetings"}
         </Badge>
     )
   }
