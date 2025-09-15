@@ -1,0 +1,74 @@
+"use client";
+import { ErrorState } from "@/components/error-state";
+import { LoadingState } from "@/components/loading-state";
+import { useTRPC } from "@/trpc/client";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { MeetingsIdViewHeader } from "../components/meeting-id-view-header";
+import { useRouter } from "next/navigation";
+import { useConfirm } from "@/modules/agents/use-confirm";
+import { UpdateMeetingDialog } from "../components/update-meeting-dialog";
+import { useState } from "react";
+
+interface Props{
+    meetingid : string;
+};
+export const MeetingIdView = ({meetingid}:Props)=>{
+    const trpc = useTRPC();
+    const router = useRouter();
+    const [UpdateMeetingDialogOpen,setUpdateMeetingDialogOpen] = useState(false);
+    const queryClient = useQueryClient(); 
+    const [RemoveConfirmation,confirmRemove] = useConfirm(
+        "Are you sure you want to delete the meeting?",
+        "This will delete the Meeting"
+    );
+    const {data} = useSuspenseQuery(
+        trpc.meetings.getOne.queryOptions({id:meetingid}),
+    );
+    const removeMeeting = useMutation(
+        trpc.meetings.remove.mutationOptions({
+            onSuccess : ()=>{
+               queryClient.invalidateQueries(trpc.meetings.getMany.queryOptions({}));
+               router.push("/meetings");
+            },
+        }),
+    );
+    const handleRemoveMeeting = async ()=>{
+        const ok = await confirmRemove();
+        if (!ok) return; 
+        await removeMeeting.mutateAsync({id:meetingid});
+    };
+    return (
+        <>
+            <RemoveConfirmation/>
+            <UpdateMeetingDialog
+            open={UpdateMeetingDialogOpen}
+            onOpenChange={setUpdateMeetingDialogOpen}
+            initialValues={data}/>
+            <div className="flex-1 py-4 px-4 md:px-8 flex flex-col gap-y-4">
+                <MeetingsIdViewHeader
+                 meetingId={meetingid}
+                 meetingName={data.name}
+                 onEdit={()=>setUpdateMeetingDialogOpen(true)}
+                 onRemove={handleRemoveMeeting}
+                 />
+               {JSON.stringify(data,null,2)}
+            </div>
+        </>
+    );
+};
+export const MeetingIdViewLoading=()=>{
+    return(
+        <LoadingState
+         title="Loading the Meeting"
+         description="Please wait for some time"
+         />
+    );
+};
+export const MeetingIdViewError=()=>{
+    return(
+        <ErrorState
+         title="Meeting couldn't e loaded"
+         description="Please try after some time"
+         />
+    );
+};
