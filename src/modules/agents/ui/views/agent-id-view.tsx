@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { error } from "console";
 import { toast } from "sonner";
 import { id } from "date-fns/locale";
-import { useConfirm } from "../../hooks/use-confirm";
+import { useConfirm } from "../../use-confirm";
 import { useState } from "react";
 import { UpdateAgentDialog } from "../components/update-agent-dialog";
 interface Props{
