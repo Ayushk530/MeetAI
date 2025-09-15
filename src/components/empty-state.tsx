@@ -4,10 +4,12 @@ import { title } from "process";
 interface Props {
     title:string;
     description:string;
+    image?:string;
 };
 export const EmptyState = ({
     title,
-    description
+    description,
+    image = "/empty.svg"
 }:Props)=>{
     return(
         <div className="flex flex-col items-center justify-center">
