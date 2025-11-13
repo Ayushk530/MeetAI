@@ -10,8 +10,7 @@ import {
 import { db } from "@/db";
 import { agents, meetings } from "@/db/schema";
 import { streamVideo } from "@/lib/stream-video";
-import { Palanquin } from "next/font/google";
-import { error } from "console";
+
 
 function verifySignatureWithSDK(body: string, signature: string): boolean {
   return streamVideo.verifyWebhook(body, signature);
@@ -22,7 +21,7 @@ export async function POST(req: NextRequest) {
   const apiKey = req.headers.get("x-api-key");
   if (!signature || !apiKey) {
     return NextResponse.json(
-      { error: "Missing signature or api key" },
+      { error: "Missing signature or API key" },
       { status: 400 }
     );
   }
