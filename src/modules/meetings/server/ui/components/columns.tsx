@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { GeneratedAvatar } from "@/components/generated-avatar"
-import { CornerDownRightIcon, VideoIcon,CircleCheckIcon,CircleXIcon,ClockArrowUpIcon,ClockFadingIcon,LoaderIcon} from "lucide-react"
+import { CornerDownRightIcon,CircleCheckIcon,CircleXIcon,ClockArrowUpIcon,ClockFadingIcon,LoaderIcon} from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { MeetingGetMany } from "@/modules/meetings/types"
 import { format } from "date-fns";

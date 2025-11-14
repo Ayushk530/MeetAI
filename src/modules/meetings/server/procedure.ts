@@ -2,7 +2,7 @@ import {db} from "@/db";
 import JSONL from "jsonl-parse-stringify";
 import {z} from "zod";
 import {agents, meetings, user} from "@/db/schema";
-import { createTRPCRouter,baseProcedure, protectedProcedure, premiumprocedure } from "@/trpc/init";
+import { createTRPCRouter, protectedProcedure, premiumprocedure } from "@/trpc/init";
 import { and, desc, eq, getTableColumns, ilike, sql,count, inArray} from "drizzle-orm";
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE, MIN_PAGE_SIZE } from "@/constants";
 import { TRPCError } from "@trpc/server";
@@ -10,8 +10,6 @@ import { meetingsInsertSchema, meetingsUpdateSchema } from "../schemas";
 import { MeetingStatus, StreamTranscriptItem } from "../types";
 import { streamVideo } from "@/lib/stream-video";
 import { generatedAvatarUri } from "@/lib/avatar";
-import { text } from "stream/consumers";
-import { name } from "@stream-io/video-react-sdk";
 import { streamChat } from "@/lib/stream-chat";
 
 export const meetingsRouter = createTRPCRouter({

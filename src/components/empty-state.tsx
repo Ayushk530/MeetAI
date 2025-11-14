@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { title } from "process";
 
 interface Props {
     title:string;
@@ -9,7 +8,6 @@ interface Props {
 export const EmptyState = ({
     title,
     description,
-    image = "/empty.svg"
 }:Props)=>{
     return(
         <div className="flex flex-col items-center justify-center">

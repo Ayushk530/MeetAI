@@ -2,16 +2,13 @@
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 import { useTRPC } from "@/trpc/client";
-import { QueryClient, useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { AgentsView } from "./agents-view";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { AgentsIdViewHeader } from "../components/agent-id-view-header";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { Badge } from "@/components/ui/badge";
 import { VideoIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { error } from "console";
 import { toast } from "sonner";
-import { id } from "date-fns/locale";
 import { useConfirm } from "../../use-confirm";
 import { useState } from "react";
 import { UpdateAgentDialog } from "../components/update-agent-dialog";

@@ -8,7 +8,6 @@ import {
 import { useTRPC } from "@/trpc/client";
 import { LoadingState } from "@/components/loading-state";
 import "stream-chat-react/dist/css/v2/index.css";
-import { meetingStatus } from "@/db/schema";
 
 interface ChatUIProps {
     meetingId : string;

@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { meetingsInsertSchema } from "@/modules/meetings/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { agents } from "@/db/schema";
 import { useState } from "react";
 import { CommandSelect } from "@/components/command-select";
 import { GeneratedAvatar } from "@/components/generated-avatar";
@@ -133,7 +132,7 @@ export const MeetingForm = ({
                                     />
                         </FormControl>
                         <FormDescription>
-                            Not found what you're looking for? {" "}
+                            Not found what you`&apos`re looking for? {" "}
                             <button 
                             type="button"
                             className="text-primary hover:underline"

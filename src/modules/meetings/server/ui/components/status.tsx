@@ -2,7 +2,6 @@ import { CommandSelect } from "@/components/command-select";
 import { useMeetingsFilters } from "@/modules/meetings/hooks/use-meetings-filter";
 import { MeetingStatus } from "@/modules/meetings/types";
 import { CircleCheckIcon, CircleXIcon, ClockArrowUpIcon, LoaderIcon, VideoIcon } from "lucide-react";
-import { Vidaloka } from "next/font/google";
 
 const options= [
     {
