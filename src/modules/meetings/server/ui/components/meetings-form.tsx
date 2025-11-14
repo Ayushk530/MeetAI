@@ -132,7 +132,7 @@ export const MeetingForm = ({
                                     />
                         </FormControl>
                         <FormDescription>
-                            Not found what you`&apos`re looking for? {" "}
+                            Not found what you're looking for? {" "}
                             <button 
                             type="button"
                             className="text-primary hover:underline"
