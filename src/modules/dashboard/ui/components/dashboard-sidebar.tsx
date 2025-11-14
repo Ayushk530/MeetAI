@@ -19,7 +19,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { UserButton } from "./user-button";
-
+import { DashboardTrial } from "./dashboard-trial";
 const firstSection = [
     {
         icon:VideoIcon,
@@ -107,6 +107,7 @@ export const DashboardSidebar = () => {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="text-white">
+                <DashboardTrial/>
                 <UserButton / >
             </SidebarFooter>
         </Sidebar>
