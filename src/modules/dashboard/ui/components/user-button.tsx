@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { GeneratedAvatar } from "@/components/generated-avatar";
-import { da } from "date-fns/locale";
 import { ChevronDownIcon, CreditCardIcon, LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -69,7 +68,7 @@ export const UserButton = () =>{
                         <DrawerDescription>{data.user.email}</DrawerDescription>
                     </DrawerHeader>
                     <DrawerFooter>
-                        <Button variant="outline" onClick={()=>{}}>
+                        <Button variant="outline" onClick={()=>authClient.customer.portal()}>
                             <CreditCardIcon className="size-4 text-black"/>
                             Billing
                         </Button>
@@ -112,7 +111,8 @@ export const UserButton = () =>{
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator/>
-                <DropdownMenuItem className="cursor-pointer flex items-center justify-between">
+                <DropdownMenuItem
+                onClick={()=>authClient.customer.portal()} className="cursor-pointer flex items-center justify-between">
                     Billing
                     <CreditCardIcon className="size-4"/>
                 </DropdownMenuItem>
