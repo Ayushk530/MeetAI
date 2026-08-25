@@ -20,7 +20,6 @@ import{
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import path from "path";
 import { useRouter } from "next/navigation";
 import {FaGithub,FaGoogle} from "react-icons/fa";
 const formSchema = z.object({

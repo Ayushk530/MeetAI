@@ -10,7 +10,7 @@ interface Props{
     userName : string;
     userImage : string; 
 };
-import { Call,CallingState,name,StreamCall,StreamVideo,StreamVideoClient} from "@stream-io/video-react-sdk";
+import { Call,CallingState,StreamCall,StreamVideo,StreamVideoClient} from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { CallUI } from "./call-ui";
 export const CallConnect = ({

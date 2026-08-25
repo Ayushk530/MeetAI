@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { agentsInsertSchema } from "../../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 interface AgentFormProps {
     onSuccess?:()=>void;
     onCancel?:()=>void;
@@ -23,6 +24,7 @@ export const AgentForm = ({
     initialValues,
 }:AgentFormProps)=>{
     const trpc = useTRPC();
+    const router = useRouter();
     const queryClient = useQueryClient();
     const createAgent = useMutation(
         trpc.agents.create.mutationOptions({
@@ -30,11 +32,17 @@ export const AgentForm = ({
                 await queryClient.invalidateQueries(
                 trpc.agents.getMany.queryOptions({}),
                 );
+                await queryClient.invalidateQueries(
+                trpc.premium.getFreeUsage.queryOptions(),
+                );
         
             onSuccess?.();
             },
             onError:(error)=>{
                 toast.error(error.message);
+                if (error.data?.code ==="FORBIDDEN") {
+                    router.push("/upgrade");
+                }
             },
         }),
     );
